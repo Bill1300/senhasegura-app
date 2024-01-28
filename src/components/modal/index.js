@@ -22,7 +22,6 @@ export function ModalPassword({ password, title, closeModal }) {
     }
     async function copyPassword() {
         await Clipboard.setStringAsync(password);
-        // Add efeito de 'copiado'
     }
     function savePass(){
         saveItem('@pass', password, title)

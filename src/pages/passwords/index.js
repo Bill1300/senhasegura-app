@@ -13,6 +13,7 @@ export function Passwords() {
     useEffect(() => {
         async function loadPasswords(){
             const passwords = await getItem('@pass');
+            console.log(passwords);
             setListPasswords(passwords);
         }
         loadPasswords()
@@ -26,8 +27,8 @@ export function Passwords() {
             <View style={styles.content}>
                 <FlatList
                     data={listPasswords}
-                    keyExtractor={(item) => String(item)}
-                    renderItem={({item}) => <PasswordItem data={item} />}
+                    keyExtractor={(item) => String(item.id)}
+                    renderItem={({item}) => <PasswordItem dataTitle={item.title} dataPassword={item.password} />}
                     style={styles.flatList}
                 />
             </View>

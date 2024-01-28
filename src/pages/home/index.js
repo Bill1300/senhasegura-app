@@ -9,7 +9,7 @@ const ICO_ESCURO = '../../assets/images/ico-escuro.png';
 
 export function Home() {
 
-  const [title, setTitle] = useState('');
+  const [titleValue, setTitleValue] = useState('');
   const [characters, setCharacters] = useState(true);
   const [numbersDigits, setNumbersDigits] = useState(10);
   const [passwordValue, setPasswordValue] = useState('');
@@ -48,8 +48,8 @@ export function Home() {
         </View>
         <TextInput
           style={styles.titleInput}
-          value={title}
-          onChangeText={setTitle}
+          value={titleValue}
+          onChangeText={setTitleValue}
           placeholder='Título'
         />
         <View style={styles.characters}>
@@ -84,7 +84,7 @@ export function Home() {
         <Text style={styles.buttonGenerateText}>Gerar senha</Text>
       </TouchableOpacity>
       <Modal visible={modalVisible} animationType='fade' transparent={true}>
-        <ModalPassword password={passwordValue} title={title} closeModal={() => setModalVisible(false)} />
+        <ModalPassword password={passwordValue} title={titleValue} closeModal={() => setModalVisible(false)} />
       </Modal>
     </View>
   )

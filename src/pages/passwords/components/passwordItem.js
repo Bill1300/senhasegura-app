@@ -2,12 +2,12 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Ionicons } from '@expo/vector-icons'
 
-export function PasswordItem({ data, removePassword }) {
+export function PasswordItem({ dataTitle, dataPassword, removePassword }) {
     return (
         <View style={styles.container}>
             <View>
-                <Text>Título</Text>
-                <Text>{data}</Text>
+                <Text>{dataTitle}</Text>
+                <Text>{dataPassword}</Text>
             </View>
             <View style={styles.buttons}>
                 <Ionicons style={styles.iconActions} name={'eye'} size={22} />
