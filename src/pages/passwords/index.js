@@ -30,7 +30,7 @@ export function Passwords() {
             </View>
             <View style={styles.content}>
                 <FlatList
-                    data={listPasswords}
+                    data={listPasswords.sort((a, b) => a.title.localeCompare(b.title))}
                     keyExtractor={(item) => String(item.id)}
                     renderItem={({ item }) => <PasswordItem dataIndex={item.id} dataTitle={item.title} dataPassword={item.password} deleteItem={() => deleteItem(item)} />}
                     style={styles.flatList}
