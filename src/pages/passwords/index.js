@@ -8,16 +8,20 @@ export function Passwords() {
 
     const [listPasswords, setListPasswords] = useState([]);
     const focused = useIsFocused();
-    const {getItem} = useStorage();
+    const { getItem, removeItem } = useStorage();
 
     useEffect(() => {
-        async function loadPasswords(){
+        async function loadPasswords() {
             const passwords = await getItem('@pass');
-            console.log(passwords);
             setListPasswords(passwords);
         }
         loadPasswords()
     }, [focused])
+
+    async function deleteItem(item) {
+        const passwordsUpdated = await removeItem('@pass', item.id);
+        setListPasswords(passwordsUpdated);
+    }
 
     return (
         <View>
@@ -28,7 +32,7 @@ export function Passwords() {
                 <FlatList
                     data={listPasswords}
                     keyExtractor={(item) => String(item.id)}
-                    renderItem={({item}) => <PasswordItem dataTitle={item.title} dataPassword={item.password} />}
+                    renderItem={({ item }) => <PasswordItem dataIndex={item.id} dataTitle={item.title} dataPassword={item.password} deleteItem={() => deleteItem(item)} />}
                     style={styles.flatList}
                 />
             </View>
@@ -48,10 +52,10 @@ const styles = StyleSheet.create({
         marginLeft: 8,
         fontWeight: 'bold'
     },
-    content:{
+    content: {
         paddingHorizontal: 10,
     },
-    flatList:{
+    flatList: {
         marginHorizontal: 4,
         marginVertical: 4,
     }

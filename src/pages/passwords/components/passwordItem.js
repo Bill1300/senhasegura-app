@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 import { Ionicons } from '@expo/vector-icons'
 import *  as Clipboard from 'expo-clipboard'
 
-export function PasswordItem({ dataTitle, dataPassword, removePassword }) {
+export function PasswordItem({ dataIndex, dataTitle, dataPassword, deleteItem }) {
 
     const [visiblePass, setVisiblePass] = useState(false);
 
@@ -25,9 +25,9 @@ export function PasswordItem({ dataTitle, dataPassword, removePassword }) {
 
     return (
         <View style={styles.container}>
-            <Pressable
+            <Pressable style={styles.copyCard}
                 onLongPress={copyPassword}>
-                <Text>{dataTitle}</Text>
+                <Text style={styles.titleText}>{dataIndex}. {dataTitle}</Text>
                 {visiblePass ? (
                     <Text style={styles.passwordShow}>{dataPassword}</Text>
                 ) : (
@@ -38,7 +38,9 @@ export function PasswordItem({ dataTitle, dataPassword, removePassword }) {
                 <Pressable onPress={toggleVisiblePassword}>
                     <Ionicons style={styles.iconActions} name={iconVisiblePass} size={22} color={'rgba(0, 48, 100, 1.0)'} />
                 </Pressable>
-                <Ionicons style={styles.iconActions} name='trash' size={22} color='rgba(204, 0, 0,1.0)' />
+                <Pressable onLongPress={deleteItem}>
+                    <Ionicons style={styles.iconActions} name='trash' size={22} color='rgba(204, 0, 0,1.0)' />
+                </Pressable>
             </View>
         </View>
     );
@@ -56,12 +58,21 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: "space-between"
     },
+    copyCard: {
+        flex: 1,
+    },
     buttons: {
         flexDirection: 'row',
         alignItems: 'center',
     },
     iconActions: {
         marginHorizontal: 6,
+    },
+    titleText: {
+        color: 'rgba(0, 0, 0, 1.0)',
+        fontWeight: 'bold',
+        fontSize: 16,
+        paddingVertical: 2,
     },
     passwordShow: {
         color: 'rgba(0, 48, 100, 1.0)',
@@ -71,6 +82,8 @@ const styles = StyleSheet.create({
     },
     passwordHidden: {
         color: 'rgba(0, 48, 100, 1.0)',
+        textAlign: 'center',
+        width: 60,
         backgroundColor: 'rgba(127, 171, 216, 1.0)',
         fontWeight: 'bold',
         fontSize: 14,
