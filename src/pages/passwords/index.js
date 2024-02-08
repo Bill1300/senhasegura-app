@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, FlatList } from 'react-native'
+import { View, Text, StyleSheet, FlatList, ToastAndroid, Image } from 'react-native'
 import { useIsFocused } from '@react-navigation/native'
 import useStorage from '../../hooks/useStorage';
 import { PasswordItem } from './components/passwordItem';
+
+const LIST_IMG = '../../assets/images/list-svgrepo-com.png'
 
 export function Passwords() {
 
@@ -21,6 +23,7 @@ export function Passwords() {
     async function deleteItem(item) {
         const passwordsUpdated = await removeItem('@pass', item.id);
         setListPasswords(passwordsUpdated);
+        ToastAndroid.show('Removido!', ToastAndroid.SHORT);
     }
 
     return (
@@ -29,12 +32,29 @@ export function Passwords() {
                 <Text style={styles.title}>Minhas senhas</Text>
             </View>
             <View style={styles.content}>
-                <FlatList
-                    data={listPasswords.sort((a, b) => a.title.localeCompare(b.title))}
-                    keyExtractor={(item) => String(item.id)}
-                    renderItem={({ item }) => <PasswordItem dataIndex={item.id} dataTitle={item.title} dataPassword={item.password} deleteItem={() => deleteItem(item)} />}
-                    style={styles.flatList}
-                />
+                {listPasswords.length > 0 ? (
+                    <FlatList
+                        data={listPasswords.sort((a, b) => a.title.localeCompare(b.title))}
+                        keyExtractor={(item) => String(item.id)}
+                        renderItem={({ item }) => (
+                            <PasswordItem
+                                dataIndex={item.id}
+                                dataTitle={item.title}
+                                dataPassword={item.password}
+                                deleteItem={() => deleteItem(item)}
+                            />
+                        )}
+                        style={styles.flatList}
+                    />
+                ) : (
+                    <View>
+                        <Image
+                            style={styles.emptyIco}
+                            source={require(LIST_IMG)}
+                        />
+                        <Text style={styles.emptyText}>Vazio</Text>
+                    </View>
+                )}
             </View>
         </View>
     )
@@ -58,5 +78,16 @@ const styles = StyleSheet.create({
     flatList: {
         marginHorizontal: 4,
         marginVertical: 4,
+    },
+    emptyIco:{
+        height: 90,
+        width: 90,
+        marginTop: '60%',
+        alignSelf: 'center',
+    },
+    emptyText: {
+        fontSize: 22,
+        textAlign: 'center',
+        color: 'rgba(187, 187, 187, 1.0)'
     }
 })

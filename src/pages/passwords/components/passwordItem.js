@@ -1,10 +1,10 @@
 import React from "react";
 import { useState } from 'react'
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import { View, Text, StyleSheet, Pressable, ToastAndroid } from "react-native";
 import { Ionicons } from '@expo/vector-icons'
 import *  as Clipboard from 'expo-clipboard'
 
-export function PasswordItem({ dataIndex, dataTitle, dataPassword, deleteItem }) {
+export function PasswordItem({ dataTitle, dataPassword, deleteItem }) {
 
     const [visiblePass, setVisiblePass] = useState(false);
 
@@ -21,13 +21,14 @@ export function PasswordItem({ dataIndex, dataTitle, dataPassword, deleteItem })
 
     async function copyPassword() {
         await Clipboard.setStringAsync(dataPassword);
+        ToastAndroid.show('Copiado!', ToastAndroid.SHORT);
     }
 
     return (
         <View style={styles.container}>
             <Pressable style={styles.copyCard}
                 onLongPress={copyPassword}>
-                <Text style={styles.titleText}>{dataIndex}. {dataTitle}</Text>
+                <Text style={styles.titleText}>{dataTitle}</Text>
                 {visiblePass ? (
                     <Text style={styles.passwordShow}>{dataPassword}</Text>
                 ) : (

@@ -78,7 +78,7 @@ export function Home() {
         </View>
       </View>
       <TouchableOpacity
-        style={styles.buttonGenerate}
+        style={[styles.buttonGenerate, styles.shadow]}
         onPress={generatePassword}
       >
         <Text style={styles.buttonGenerateText}>Gerar senha</Text>
@@ -93,7 +93,6 @@ export function Home() {
 styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'rgba(204, 204, 204, 1.0)',
     justifyContent: 'center',
     alignItems: 'center'
   },
