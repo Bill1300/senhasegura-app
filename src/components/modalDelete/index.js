@@ -9,7 +9,6 @@ export function ModalDelete({dataIndexDelete, dataTitleDelete, closeModal }) {
     async function deleteItem() {
         closeModal()
         removeItem('@pass', dataIndexDelete);
-        console.log('DELETADO')
     }
 
     return (

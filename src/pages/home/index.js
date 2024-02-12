@@ -10,6 +10,7 @@ const ICO_ESCURO = '../../assets/images/ico-escuro.png';
 export function Home() {
 
   const [titleValue, setTitleValue] = useState('');
+  const [titleValueInput, setTitleValueInput] = useState('');
   const [characters, setCharacters] = useState(true);
   const [numbersDigits, setNumbersDigits] = useState(10);
   const [passwordValue, setPasswordValue] = useState('');
@@ -27,6 +28,8 @@ export function Home() {
   }
 
   function generatePassword() {
+    setTitleValue(titleValueInput)
+    setTitleValueInput('')
     var charset = characters ? baseCharset1 : baseCharset2;
     let pass = '';
     for (let i = 0, n = charset.length; i < numbersDigits; i++) {
@@ -48,8 +51,8 @@ export function Home() {
         </View>
         <TextInput
           style={styles.titleInput}
-          value={titleValue}
-          onChangeText={setTitleValue}
+          value={titleValueInput}
+          onChangeText={setTitleValueInput}
           placeholder='Título'
         />
         <View style={styles.characters}>
