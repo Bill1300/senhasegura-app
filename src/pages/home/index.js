@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, Text, Image, TextInput, TouchableOpacity, Modal, StyleSheet, Pressable } from 'react-native';
+import { View, Text, Image, TextInput, ToastAndroid, TouchableOpacity, Modal, StyleSheet, Pressable } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import Slider from '@react-native-community/slider';
 import { ModalPassword } from '../../components/modalView';
@@ -28,15 +28,19 @@ export function Home() {
   }
 
   function generatePassword() {
-    setTitleValue(titleValueInput)
-    setTitleValueInput('')
-    var charset = characters ? baseCharset1 : baseCharset2;
-    let pass = '';
-    for (let i = 0, n = charset.length; i < numbersDigits; i++) {
-      pass += charset.charAt(Math.floor(Math.random() * n));
+    if(titleValueInput.length > 0){
+      setTitleValue(titleValueInput)
+      setTitleValueInput('')
+      var charset = characters ? baseCharset1 : baseCharset2;
+      let pass = '';
+      for (let i = 0, n = charset.length; i < numbersDigits; i++) {
+        pass += charset.charAt(Math.floor(Math.random() * n));
+      }
+      setPasswordValue(pass)
+      setModalVisible(true)
+    } else {
+      ToastAndroid.show('Insira um título!', ToastAndroid.SHORT);
     }
-    setPasswordValue(pass)
-    setModalVisible(true)
   }
 
   return (
