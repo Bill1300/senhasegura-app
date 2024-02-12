@@ -3,6 +3,7 @@ import { View, Text, Image, TextInput, ToastAndroid, TouchableOpacity, Modal, St
 import Checkbox from 'expo-checkbox';
 import Slider from '@react-native-community/slider';
 import { ModalPassword } from '../../components/modalView';
+//import * as LocalAuthentication from 'expo-local-authentication'
 
 const ICO_CLARO = '../../assets/images/ico-claro.png';
 const ICO_ESCURO = '../../assets/images/ico-escuro.png';
