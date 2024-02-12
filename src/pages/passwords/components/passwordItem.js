@@ -1,13 +1,16 @@
 import React from "react";
 import { useState } from 'react'
-import { View, Text, StyleSheet, Pressable, ToastAndroid } from "react-native";
+import { View, Text, StyleSheet, Pressable, ToastAndroid, Modal } from "react-native";
 import { Ionicons } from '@expo/vector-icons'
 import *  as Clipboard from 'expo-clipboard'
+import { ModalDelete } from "../../../components/modalDelete";
 
-export function PasswordItem({ dataTitle, dataPassword, deleteItem }) {
+
+export function PasswordItem({ dataTitle, dataPassword, dataIndex }) {
 
     const [visiblePass, setVisiblePass] = useState(false);
 
+    const [modalVisible, setModalVisible] = useState(false);
     const [iconVisiblePass, setIconVisiblePass] = useState('eye-outline')
     function toggleVisiblePassword() {
         if (visiblePass) {
@@ -39,10 +42,13 @@ export function PasswordItem({ dataTitle, dataPassword, deleteItem }) {
                 <Pressable onPress={toggleVisiblePassword}>
                     <Ionicons style={styles.iconActions} name={iconVisiblePass} size={22} color={'rgba(0, 48, 100, 1.0)'} />
                 </Pressable>
-                <Pressable onLongPress={deleteItem}>
+                <Pressable onLongPress={() => setModalVisible(true)}>
                     <Ionicons style={styles.iconActions} name='trash' size={22} color='rgba(204, 0, 0,1.0)' />
                 </Pressable>
             </View>
+            <Modal visible={modalVisible} animationType='fade' transparent={true}>
+                <ModalDelete dataIndexDelete={dataIndex} dataTitleDelete={dataTitle} closeModal={() => setModalVisible(false)} />
+            </Modal>
         </View>
     );
 }

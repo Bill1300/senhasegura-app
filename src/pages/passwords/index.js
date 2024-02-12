@@ -4,7 +4,7 @@ import { useIsFocused } from '@react-navigation/native'
 import useStorage from '../../hooks/useStorage';
 import { PasswordItem } from './components/passwordItem';
 
-const LIST_IMG = '../../assets/images/list-svgrepo-com.png'
+const LIST_IMG = '../../assets/images/ico-list.png'
 
 export function Passwords() {
 
@@ -18,7 +18,7 @@ export function Passwords() {
             setListPasswords(passwords);
         }
         loadPasswords()
-    }, [focused])
+    }, [focused, listPasswords])
 
     async function deleteItem(item) {
         const passwordsUpdated = await removeItem('@pass', item.id);
@@ -52,7 +52,7 @@ export function Passwords() {
                             style={styles.emptyIco}
                             source={require(LIST_IMG)}
                         />
-                        <Text style={styles.emptyText}>Vazio</Text>
+                        <Text style={styles.emptyText}>A lista está vazia</Text>
                     </View>
                 )}
             </View>

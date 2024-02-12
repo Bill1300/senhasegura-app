@@ -1,7 +1,5 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import useStorage from '../../hooks/useStorage';
-import { Passwords } from '../../pages/passwords';
-import { useNavigate } from 'react-router-dom';
 
 
 export function ModalDelete({dataIndexDelete, dataTitleDelete, closeModal }) {
@@ -9,10 +7,9 @@ export function ModalDelete({dataIndexDelete, dataTitleDelete, closeModal }) {
     const {removeItem} = useStorage();
 
     async function deleteItem() {
-        let listPassword = await removeItem('@pass', dataIndexDelete);
-        const navigate = useNavigate()
-        navigate(Passwords)
         closeModal()
+        removeItem('@pass', dataIndexDelete);
+        console.log('DELETADO')
     }
 
     return (
@@ -55,7 +52,8 @@ const styles = StyleSheet.create({
         marginBottom: 8,
     },
     layoutTextBold:{
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontSize: 16,
     },
     buttonsBlock: {
         flexDirection: 'row',
