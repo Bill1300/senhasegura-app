@@ -18,19 +18,19 @@ export default function App() {
       return Alert.alert('Erro', 'Nenhuma biometria cadastrada no dispositivo.');
     }
     const auth = await LocalAuthentication.authenticateAsync({
-      promptMessage: 'Entrada com biometria',
+      promptMessage: 'Entrada em SenhaSegura por biometria',
       fallbackLabel: 'Biometria não reconhecida'
     });
     console.log(auth)
     setBiometric(auth.success)
   }
 
-  async function verifyAvailableAuthentication(){
-    const compatible = await LocalAuthentication.hasHardwareAsync();
-    console.log('compatible ', compatible);
-    const types = await LocalAuthentication.supportedAuthenticationTypesAsync();
-    console.log('types ', types)
-  }
+  // async function verifyAvailableAuthentication(){
+  //   const compatible = await LocalAuthentication.hasHardwareAsync();
+  //   console.log('compatible ', compatible);
+  //   const types = await LocalAuthentication.supportedAuthenticationTypesAsync();
+  //   console.log('types ', types)
+  // }
 
   return (
     <>
