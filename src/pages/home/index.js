@@ -1,17 +1,16 @@
-import { useState } from 'react';
-import { View, Text, Image, TextInput, ToastAndroid, TouchableOpacity, Modal, StyleSheet, Pressable } from 'react-native';
+import { useEffect, useState } from 'react';
+import { View, Text, Image, TextInput, ToastAndroid, TouchableOpacity, Modal, StyleSheet, Pressable, Alert } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import Slider from '@react-native-community/slider';
 import { ModalPassword } from '../../components/modalView';
-//import * as LocalAuthentication from 'expo-local-authentication'
 
 const ICO_CLARO = '../../assets/images/ico-claro.png';
 const ICO_ESCURO = '../../assets/images/ico-escuro.png';
 
 export function Home() {
 
-  const [titleValue, setTitleValue] = useState('');
-  const [titleValueInput, setTitleValueInput] = useState('');
+  const [titleValue, setTitleValue] = useState('');           //Valor de titulo em função
+  const [titleValueInput, setTitleValueInput] = useState(''); //Valor de titulo em elemento de entrada
   const [characters, setCharacters] = useState(true);
   const [numbersDigits, setNumbersDigits] = useState(10);
   const [passwordValue, setPasswordValue] = useState('');
@@ -29,9 +28,9 @@ export function Home() {
   }
 
   function generatePassword() {
-    if(titleValueInput.length > 0){
-      setTitleValue(titleValueInput)
-      setTitleValueInput('')
+    if (titleValueInput.length > 0) {
+      setTitleValue(titleValueInput);
+      setTitleValueInput('');
       var charset = characters ? baseCharset1 : baseCharset2;
       let pass = '';
       for (let i = 0, n = charset.length; i < numbersDigits; i++) {
